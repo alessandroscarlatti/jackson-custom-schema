@@ -1,0 +1,35 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-amqp'
+//	compile group: 'com.github.topikachu', name: 'JSONschema4-mapper', version: '0.0.1'
+	compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-jsonSchema', version: '2.9.2'
+
+
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+	testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
+	testCompile 'cglib:cglib-nodep:2.2'
+}
