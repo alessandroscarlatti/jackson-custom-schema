@@ -2,12 +2,9 @@ package com.scarlatti.attempt2;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonStringFormatVisitor;
 import com.fasterxml.jackson.module.jsonSchema.customProperties.HyperSchemaFactoryWrapper;
 import com.fasterxml.jackson.module.jsonSchema.factories.StringVisitor;
-import com.scarlatti.App;
 
 /**
  * ~     _____                                    __
@@ -27,32 +24,28 @@ public class CustomHyperSchemaFactoryWrapper extends HyperSchemaFactoryWrapper {
         visitorFactory = new CustomFormatVisitorFactory(new CustomHyperSchemaFactoryWrapperFactory());
     }
 
+    /**
+     * This seems to be the principle hack point so far!
+     *
+     * This method is called by default when the default visitor encounters an enum.
+     * Instead of returning a default StringVisitor, we will return a custom visitor!
+     *
+     * We will either call super or call my own factory method.
+     *
+     * @param convertedType the class that was found that should be handled with "string format"
+     * @return the visitor that this factory would like to be used by the
+     *         serializer already accepting another visitor.
+     */
     @Override
     public JsonStringFormatVisitor expectStringFormat(JavaType convertedType) {
-        System.out.println("expect string format: " + convertedType);
-        // TODO I can perform logic to determine whether to call super()
-        // TODO or whether to call my own factory method.
         if (Enum.class.isAssignableFrom(convertedType.getRawClass())) {
 
+            // TODO can I build this visitor without the factory?
             JsonStringFormatVisitor visitor = ((CustomFormatVisitorFactory)visitorFactory).jsonEnumStringFormatVisitor();
             schema = ((StringVisitor)visitor).getSchema();
             return visitor;
+        } else {
+            return super.expectStringFormat(convertedType);
         }
-        return super.expectStringFormat(convertedType);
-    }
-
-    @Override
-    public JsonObjectFormatVisitor expectObjectFormat(JavaType convertedType) {
-        System.out.println("expect object format: " + convertedType);
-
-        JsonObjectFormatVisitor v = super.expectObjectFormat(convertedType);
-        return v;
-    }
-
-    @Override
-    public JsonArrayFormatVisitor expectArrayFormat(JavaType convertedType) {
-        System.out.println("expect array format: " + convertedType);
-
-        return super.expectArrayFormat(convertedType);
     }
 }

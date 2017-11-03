@@ -25,7 +25,7 @@ public class SchemaDemo {
 
         // Use a custom serializer provider.
         // This allows us to ?
-        // Do we need custom serializing?
+        // Do we need custom serializing?  Yes.
         mapper.setSerializerProvider(new CustomSerializerProvider());
 
         // configure a schema factory (get a wrapper)
