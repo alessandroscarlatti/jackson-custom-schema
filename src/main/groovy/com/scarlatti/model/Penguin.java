@@ -1,4 +1,4 @@
-package com.scarlatti;
+package com.scarlatti.model;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import java.util.List;
 public class Penguin {
     private List<Feather> feathers;
     private FurColor furColor;
+    private Penguin child;
 
     public List<Feather> getFeathers() {
         return feathers;
@@ -28,5 +29,13 @@ public class Penguin {
 
     public void setFurColor(FurColor furColor) {
         this.furColor = furColor;
+    }
+
+    public Penguin getChild() {
+        return child;
+    }
+
+    public void setChild(Penguin child) {
+        this.child = child;
     }
 }

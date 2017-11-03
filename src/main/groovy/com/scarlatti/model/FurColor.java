@@ -1,4 +1,4 @@
-package com.scarlatti;
+package com.scarlatti.model;
 
 /**
  * ~     _____                                    __
