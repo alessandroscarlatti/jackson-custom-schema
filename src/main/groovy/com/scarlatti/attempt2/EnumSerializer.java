@@ -39,7 +39,7 @@ public class EnumSerializer extends JsonSerializer<Object> {
      * instantiate this abstract class to create a visitable object.
      */
     @Override
-    public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
+    public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) {
         System.out.println("serializing object " + value);
     }
 

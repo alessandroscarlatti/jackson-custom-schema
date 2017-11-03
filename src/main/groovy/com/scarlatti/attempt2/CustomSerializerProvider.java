@@ -19,7 +19,13 @@ import com.fasterxml.jackson.databind.ser.SerializerFactory;
  */
 public class CustomSerializerProvider extends DefaultSerializerProvider {
 
-    // must have constructor for abstract class
+    // using this method to build for
+    // injection into ObjectMapper.
+    protected CustomSerializerProvider() {
+        super();
+    }
+
+    // must have this constructor for abstract class
     protected CustomSerializerProvider(SerializerProvider src, SerializationConfig config, SerializerFactory f) {
         super(src, config, f);
     }
@@ -42,7 +48,7 @@ public class CustomSerializerProvider extends DefaultSerializerProvider {
         return super.findValueSerializer(valueType, property);
     }
 
-    // Do I need this?  Technically, yes since it's an abstract method in the DefaultSerializerProvider
+    // Do I need this?  No, it's never called, but technically, yes since it's an abstract method in the DefaultSerializerProvider
     @Override
     public CustomSerializerProvider createInstance(SerializationConfig config, SerializerFactory jsf) {
         return new CustomSerializerProvider(this, config, jsf);
