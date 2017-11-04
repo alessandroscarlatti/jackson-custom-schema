@@ -2,6 +2,7 @@ package com.scarlatti.attempt2;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
+import com.scarlatti.model.FurColor;
 import com.scarlatti.model.Penguin;
 
 /**
@@ -12,9 +13,9 @@ import com.scarlatti.model.Penguin;
  * ~  (_/                                   (_/
  * ~  Thursday, 11/2/2017
  */
-public class SchemaDemo {
+public class SchemaDemo2 {
     public static void main(String[] args) throws Exception {
-        new SchemaDemo().run();
+        new SchemaDemo2().run();
     }
 
     public void run() throws Exception {
@@ -35,7 +36,7 @@ public class SchemaDemo {
 
         // Tell the object mapper to accept a schema factory for JSON format visiting!
         // Again, this factory will HOLD the working, and eventually final schema.
-        mapper.acceptJsonFormatVisitor(Penguin.class, schemaFactory);
+        mapper.acceptJsonFormatVisitor(FurColor.class, schemaFactory);
 
         // now just tell Jackson to serialize the POJO structure.
         // That is our "schema".

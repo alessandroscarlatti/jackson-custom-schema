@@ -15,7 +15,7 @@ import com.fasterxml.jackson.module.jsonSchema.factories.StringVisitor;
  * ~  Thursday, 11/2/2017
  */
 public class CustomSchemaFactoryWrapper extends SchemaFactoryWrapper {
-    CustomSchemaFactoryWrapper() {
+    public CustomSchemaFactoryWrapper() {
         visitorFactory = new CustomFormatVisitorFactory(new CustomSchemaFactoryWrapperFactory());
     }
 

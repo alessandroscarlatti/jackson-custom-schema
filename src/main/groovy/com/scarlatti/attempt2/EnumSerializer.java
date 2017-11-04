@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,7 +101,14 @@ public class EnumSerializer extends JsonSerializer<Object> {
                 // TODO confirm that we definitely want isPrivate()
                 if (Modifier.isPrivate(field.getModifiers()) && !field.isSynthetic()) {
                     field.setAccessible(true);
-                    fieldMap.put(field.getName(), field.get(enumConst));  // add the field to the map
+
+                    // if the field is an enum, use my custom serialization for it!
+//                    if (Enum.class.isAssignableFrom(field.getType())) {
+//                        CustomEnumSchema schema = new CustomEnumSchema();
+//                        buildEnumSchemaFields(schema, field.getType());
+//                        fieldMap.put(field.getName(), schema);
+//                    } else
+                        fieldMap.put(field.getName(), field.get(enumConst));  // add the field to the map
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Error building schema with class: " +

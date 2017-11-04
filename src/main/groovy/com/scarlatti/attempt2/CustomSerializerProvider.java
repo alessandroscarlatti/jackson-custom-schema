@@ -21,7 +21,7 @@ public class CustomSerializerProvider extends DefaultSerializerProvider {
 
     // using this method to build for
     // injection into ObjectMapper.
-    protected CustomSerializerProvider() {
+    public CustomSerializerProvider() {
         super();
     }
 
