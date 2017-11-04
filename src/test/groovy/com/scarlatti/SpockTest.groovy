@@ -9,7 +9,9 @@ import spock.lang.Specification
 class SpockTest extends Specification {
     @Test
     "test that a spock test will run"() {
-        expect:
+        when:
+            println "running spock test..."
+        then:
             notThrown(Exception)
     }
 }

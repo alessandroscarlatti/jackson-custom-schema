@@ -9,11 +9,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
 import com.fasterxml.jackson.module.jsonSchema.factories.StringVisitor;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,9 +32,9 @@ import java.util.Map;
  * have to implement the serialize() method?
  *
  */
-public class EnumSerializer extends JsonSerializer<Object> {
+public class CustomEnumSerializer extends JsonSerializer<Object> {
     /**
-     * I don't need this method, except that I need it in order to
+     * N.B. I don't need this method, except that I need it in order to
      * instantiate this abstract class to create a visitable object.
      */
     @Override
@@ -45,7 +43,7 @@ public class EnumSerializer extends JsonSerializer<Object> {
     }
 
     /**
-     * This serializer only gets called to accept a visitor if the value is an enum.
+     * N.B. This serializer only intended to be called to accept a visitor if the value is an enum.
      * This is an assumption made.
      *
      * @param visitor the visitor
@@ -55,14 +53,12 @@ public class EnumSerializer extends JsonSerializer<Object> {
      */
     @Override
     public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType type) throws JsonMappingException {
-        System.out.println("accepting json format visitor...");
+        if (!(Enum.class.isAssignableFrom(type.getRawClass())))
+            throw new RuntimeException("Custom Enum Serializer should only be called for enum classes, " +
+                "but was called for class " + type.getRawClass().getName());
 
         // hopefully, tell the visitor to build a string (custom enum string) schema object
-        // TODO can this be returned as StringVisitor?
         StringVisitor stringVisitor = (StringVisitor)visitor.expectStringFormat(type);
-//                        objectVisitor.setVisitorContext(null);  // I only needed to do this when it was an ObjectVisitor
-        // TODO ^^ would this get rid of the $ref?  Yes, but in an serializer for objects, not enums, unless this one could do double duty!...
-        // TODO what happens with an enum inside an enum?
 
         CustomEnumSchema schema = (CustomEnumSchema)stringVisitor.getSchema();
         buildEnumSchemaFields(schema, type.getRawClass());
@@ -96,6 +92,9 @@ public class EnumSerializer extends JsonSerializer<Object> {
         // we only want the specific fields for the declared enum class.
         // we don't want the synthetically generated fields, $values, for example.
         // but we don't want public fields either?
+
+        fieldMap.put("name", enumConst.name());  // make sure to add the name of the enum!
+
         for (Field field : enumConst.getClass().getDeclaredFields()) {
             try {
                 // TODO confirm that we definitely want isPrivate()
