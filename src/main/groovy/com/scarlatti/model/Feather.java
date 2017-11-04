@@ -9,4 +9,13 @@ package com.scarlatti.model;
  * ~  Thursday, 10/26/2017
  */
 public class Feather {
+    FurColor furColor3;
+
+    public FurColor getFurColor3() {
+        return furColor3;
+    }
+
+    public void setFurColor3(FurColor furColor3) {
+        this.furColor3 = furColor3;
+    }
 }

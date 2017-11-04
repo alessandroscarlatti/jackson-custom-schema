@@ -3,7 +3,7 @@ package com.scarlatti.attempt2;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonStringFormatVisitor;
-import com.fasterxml.jackson.module.jsonSchema.customProperties.HyperSchemaFactoryWrapper;
+import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
 import com.fasterxml.jackson.module.jsonSchema.factories.StringVisitor;
 
 /**
@@ -14,14 +14,14 @@ import com.fasterxml.jackson.module.jsonSchema.factories.StringVisitor;
  * ~  (_/                                   (_/
  * ~  Thursday, 11/2/2017
  */
-public class CustomHyperSchemaFactoryWrapper extends HyperSchemaFactoryWrapper {
-    CustomHyperSchemaFactoryWrapper() {
-        visitorFactory = new CustomFormatVisitorFactory(new CustomHyperSchemaFactoryWrapperFactory());
+public class CustomSchemaFactoryWrapper extends SchemaFactoryWrapper {
+    CustomSchemaFactoryWrapper() {
+        visitorFactory = new CustomFormatVisitorFactory(new CustomSchemaFactoryWrapperFactory());
     }
 
-    public CustomHyperSchemaFactoryWrapper(SerializerProvider p) {
+    public CustomSchemaFactoryWrapper(SerializerProvider p) {
         super(p);
-        visitorFactory = new CustomFormatVisitorFactory(new CustomHyperSchemaFactoryWrapperFactory());
+        visitorFactory = new CustomFormatVisitorFactory(new CustomSchemaFactoryWrapperFactory());
     }
 
     /**

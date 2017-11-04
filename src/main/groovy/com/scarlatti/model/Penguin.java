@@ -12,8 +12,9 @@ import java.util.List;
  */
 public class Penguin {
     private List<Feather> feathers;
+    private List<Feather> feathers2;
     private FurColor furColor;
-    private Penguin child;
+    private FurColor furColor2;
 
     public List<Feather> getFeathers() {
         return feathers;
@@ -31,11 +32,19 @@ public class Penguin {
         this.furColor = furColor;
     }
 
-    public Penguin getChild() {
-        return child;
+    public List<Feather> getFeathers2() {
+        return feathers2;
     }
 
-    public void setChild(Penguin child) {
-        this.child = child;
+    public void setFeathers2(List<Feather> feathers2) {
+        this.feathers2 = feathers2;
+    }
+
+    public FurColor getFurColor2() {
+        return furColor2;
+    }
+
+    public void setFurColor2(FurColor furColor2) {
+        this.furColor2 = furColor2;
     }
 }
