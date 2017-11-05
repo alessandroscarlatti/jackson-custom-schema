@@ -1,4 +1,4 @@
-package com.scarlatti.attempt2;
+package com.scarlatti.attempt2.schemas;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.module.jsonSchema.types.StringSchema;

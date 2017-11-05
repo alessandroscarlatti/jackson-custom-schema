@@ -3,6 +3,7 @@ package com.scarlatti.attempt2;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.ser.DefaultSerializerProvider;
 import com.fasterxml.jackson.databind.ser.SerializerFactory;
+import com.scarlatti.attempt2.serializers.XEnumSerializer;
 
 /**
  * ~     _____                                    __
@@ -34,7 +35,7 @@ public class CustomSerializerProvider extends DefaultSerializerProvider {
     }
 
     /**
-     * N.B. Do I need this?  No, it's never called, but YES, since it's an abstract method in the DefaultSerializerProvider
+     * must have this method for abstract class
      */
     @Override
     public CustomSerializerProvider createInstance(SerializationConfig config, SerializerFactory jsf) {
@@ -42,6 +43,8 @@ public class CustomSerializerProvider extends DefaultSerializerProvider {
     }
 
     /**
+     * The only time that I want to use a custom serializer right now is for enums.
+     *
      * @param valueType the visitor is asking for a serializer for this value type
      * @param property  we will ignore for which property the visitor is asking
      * @return the serializer to use (for visitable)
@@ -50,13 +53,10 @@ public class CustomSerializerProvider extends DefaultSerializerProvider {
     @Override
     public JsonSerializer<Object> findValueSerializer(JavaType valueType, BeanProperty property) throws JsonMappingException {
         if (Enum.class.isAssignableFrom(valueType.getRawClass())) {
-            System.out.println("found an enum...");
-            // now return my own enum serializer
-            return new CustomEnumSerializer();
+            return new XEnumSerializer();  // now return my own enum serializer
         }
 
-        System.out.println("find value serializer for type " + valueType + " and property " + property);
-        return super.findValueSerializer(valueType, property);
+        return super.findValueSerializer(valueType, property);  // ultimately calls the visitor factory?
     }
 
     /**
@@ -88,5 +88,20 @@ public class CustomSerializerProvider extends DefaultSerializerProvider {
      * - Object: include the full object structure.
      * - Map: include the full map.
      *
+     * Methods I will need to subclass...and schemas I will need to extend.
+     *
+     * AnyFormat        when is this used??  How is it distinct from ObjectFormat?  (maybe for Object.class)
+     * ArrayFormat
+     * BooleanFormat
+     * IntegerFormat
+     * NullFormat
+     * NumberFormat     is this only used when the number is determined not to be IntegerFormat?
+     * ObjectFormat     (maybe for any class not any specific format, but NOT Object.class)
+     * StringFormat
+     * MapFormat
+     *
+     * Perhaps all my custom schemas should just have a map of custom values?  It could be more extensible...
+     * And if the map is empty it won't appear on the schema anyway.  So it doesn't hurt to have it there,
+     * and it would probably make further development that much quicker and easier.  Less subclassing!
      */
 }

@@ -2,6 +2,7 @@ package com.scarlatti.attempt2;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
+import com.scarlatti.attempt2.visitors.CustomJsonFormatVisitor;
 import com.scarlatti.model.Penguin;
 
 /**
@@ -31,7 +32,7 @@ public class SchemaDemo {
         // configure a schema factory (get a wrapper)
         // this factory will hold a working state of the
         // schema (read hierarchical structure of POJOs)
-        SchemaFactoryWrapper schemaFactory = new CustomSchemaFactoryWrapper();
+        SchemaFactoryWrapper schemaFactory = new CustomJsonFormatVisitor();
 
         // Tell the object mapper to accept a schema factory for JSON format visiting!
         // Again, this factory will HOLD the working, and eventually final schema.

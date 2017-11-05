@@ -15,6 +15,7 @@ public class Penguin {
     private List<Feather> feathers2;
     private FurColor furColor;
     private FurColor furColor2;
+    private String penguinName;
 
     public List<Feather> getFeathers() {
         return feathers;
@@ -46,5 +47,13 @@ public class Penguin {
 
     public void setFurColor2(FurColor furColor2) {
         this.furColor2 = furColor2;
+    }
+
+    public String getPenguinName() {
+        return penguinName;
+    }
+
+    public void setPenguinName(String penguinName) {
+        this.penguinName = penguinName;
     }
 }
