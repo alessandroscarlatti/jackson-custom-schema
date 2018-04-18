@@ -20,9 +20,9 @@ import java.util.*;
 /**
  * Created by pc on 10/25/2017.
  */
-public class App {
+public class SchemaDemoOld {
     public static void main(String[] args) throws Exception {
-        new App().run();
+        new SchemaDemoOld().run();
     }
 
     public void run() throws Exception {

@@ -1,6 +1,7 @@
-package com.scarlatti.attempt2.schemas;
+package com.scarlatti.lib.schemas;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.module.jsonSchema.types.ObjectSchema;
 import com.fasterxml.jackson.module.jsonSchema.types.StringSchema;
 
 import java.util.List;
@@ -16,14 +17,14 @@ import java.util.Map;
  *
  * An extensible string schema.
  */
-public class XStringSchema extends StringSchema {
+public class XZonedDateTimeSchema extends ObjectSchema {
 
     /**
      * This behavior is such that xProps will not even
      * appear in the schema if it has not been instantiated.
      */
     @JsonProperty
-    Map<String, Object> xProps;
+    private String specialFormat;
 
     /**
      * Override the "enum" property to accept my custom enum schemas.
@@ -31,12 +32,12 @@ public class XStringSchema extends StringSchema {
     @JsonProperty("enum")
     private List<Object> enumValues;
 
-    public Map<String, Object> getxProps() {
-        return xProps;
+    public String getSpecialFormat() {
+        return specialFormat;
     }
 
-    public void setxProps(Map<String, Object> xProps) {
-        this.xProps = xProps;
+    public void setSpecialFormat(String specialFormat) {
+        this.specialFormat = specialFormat;
     }
 
     public List<Object> getEnumValues() {

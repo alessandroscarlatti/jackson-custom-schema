@@ -1,5 +1,5 @@
 com.scarlatti
-com.scarlatti.attempt2
-com.scarlatti.attempt2.schemas
-com.scarlatti.attempt2.serializers
-com.scarlatti.attempt2.visitors
+com.scarlatti.lib
+com.scarlatti.lib.schemas
+com.scarlatti.lib.serializers
+com.scarlatti.lib.visitors

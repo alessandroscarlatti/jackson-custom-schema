@@ -1,12 +1,8 @@
-package com.scarlatti.attempt2.serializers;
+package com.scarlatti.lib.serializers;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
-import com.scarlatti.attempt2.schemas.XProps;
 
 /**
  * ~     _____                                    __

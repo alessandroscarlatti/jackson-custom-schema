@@ -1,9 +1,16 @@
-package com.scarlatti.attempt2.visitors;
+package com.scarlatti.lib.visitors;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonStringFormatVisitor;
 import com.fasterxml.jackson.module.jsonSchema.factories.FormatVisitorFactory;
 import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
-import com.scarlatti.attempt2.schemas.CustomSchemaFactory;
+import com.scarlatti.lib.schemas.CustomSchemaFactory;
+import com.scarlatti.lib.schemas.XZonedDateTimeSchema;
+
+import java.time.ZonedDateTime;
 
 /**
  * ~     _____                                    __
@@ -29,6 +36,31 @@ public class CustomJsonFormatVisitor extends SchemaFactoryWrapper {
         visitorFactory = new FormatVisitorFactory(new CustomVisitorFactory());  // TODO try leaving this out...
         schemaProvider = new CustomSchemaFactory();  // inject my custom schemas
     }
+
+    @Override
+    public JsonAnyFormatVisitor expectAnyFormat(JavaType convertedType) {
+        return super.expectAnyFormat(convertedType);
+    }
+
+    /**
+     * ZonedDateTime winds up here!!
+     * @param convertedType the type of the item (field) being considered
+     * @return the visitor which will contain the correct schema object
+     */
+    @Override
+    public JsonObjectFormatVisitor expectObjectFormat(JavaType convertedType) {
+
+//        if (convertedType.getRawClass().isAssignableFrom(ZonedDateTime.class)) {
+//            return new XZonedDateTimeSchema();
+//        }
+
+
+        return super.expectObjectFormat(convertedType);
+    }
+
+//    public JsonStringFormatVisitor expectZonedDateTimeFormat(JavaType convertedType) {
+//        return new XZonedDateTimeSchema();
+//    }
 
     /**
      * TODO review this documentation...  I'm hacking it differently now...

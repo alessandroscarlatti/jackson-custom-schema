@@ -1,4 +1,4 @@
-package com.scarlatti.attempt2.schemas;
+package com.scarlatti.lib.schemas;
 
 import com.fasterxml.jackson.module.jsonSchema.factories.JsonSchemaFactory;
 import com.fasterxml.jackson.module.jsonSchema.types.*;

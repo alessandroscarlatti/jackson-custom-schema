@@ -1,7 +1,8 @@
-package com.scarlatti.attempt2;
+package com.scarlatti;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scarlatti.attempt2.visitors.CustomJsonFormatVisitor;
+import com.scarlatti.lib.CustomSerializerProvider;
+import com.scarlatti.lib.visitors.CustomJsonFormatVisitor;
 import com.scarlatti.model.FurColor;
 
 /**

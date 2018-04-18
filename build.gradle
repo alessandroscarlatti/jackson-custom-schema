@@ -10,8 +10,7 @@ buildscript {
 	}
 }
 
-apply plugin: 'java'
-apply plugin: 'groovy'  // intellij keeps the source roots marked properly for groovy when this is applied
+apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 

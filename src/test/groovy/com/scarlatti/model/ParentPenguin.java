@@ -1,7 +1,5 @@
 package com.scarlatti.model;
 
-import java.util.List;
-
 /**
  * ~     _____                                    __
  * ~    (, /  |  /)                /)         (__/  )      /)        ,

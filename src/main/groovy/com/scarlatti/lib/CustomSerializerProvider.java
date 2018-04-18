@@ -1,9 +1,12 @@
-package com.scarlatti.attempt2;
+package com.scarlatti.lib;
 
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.ser.DefaultSerializerProvider;
 import com.fasterxml.jackson.databind.ser.SerializerFactory;
-import com.scarlatti.attempt2.serializers.XEnumSerializer;
+import com.scarlatti.lib.serializers.XEnumSerializer;
+import com.scarlatti.lib.serializers.XZonedDateTimeSerializer;
+
+import java.time.ZonedDateTime;
 
 /**
  * ~     _____                                    __
@@ -55,6 +58,12 @@ public class CustomSerializerProvider extends DefaultSerializerProvider {
         if (Enum.class.isAssignableFrom(valueType.getRawClass())) {
             return new XEnumSerializer();  // now return my own enum serializer
         }
+
+        if (ZonedDateTime.class.isAssignableFrom(valueType.getRawClass())) {
+            return new XZonedDateTimeSerializer();
+        }
+
+        // TODO add support for ZonedDateTime
 
         return super.findValueSerializer(valueType, property);  // ultimately calls the visitor factory?
     }

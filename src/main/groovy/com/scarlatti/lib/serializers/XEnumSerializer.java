@@ -1,15 +1,10 @@
-package com.scarlatti.attempt2.serializers;
+package com.scarlatti.lib.serializers;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
 import com.fasterxml.jackson.module.jsonSchema.factories.StringVisitor;
-import com.scarlatti.attempt2.schemas.CustomEnumSchema;
-import com.scarlatti.attempt2.schemas.XStringSchema;
-import com.scarlatti.attempt2.visitors.CustomJsonFormatVisitor;
+import com.scarlatti.lib.schemas.XStringSchema;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

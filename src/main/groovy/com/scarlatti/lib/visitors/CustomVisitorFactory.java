@@ -1,11 +1,10 @@
-package com.scarlatti.attempt2.visitors;
+package com.scarlatti.lib.visitors;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
 import com.fasterxml.jackson.module.jsonSchema.factories.VisitorContext;
 import com.fasterxml.jackson.module.jsonSchema.factories.WrapperFactory;
-import com.scarlatti.attempt2.visitors.CustomJsonFormatVisitor;
 
 /**
  * ~     _____                                    __

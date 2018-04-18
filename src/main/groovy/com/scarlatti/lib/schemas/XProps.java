@@ -1,4 +1,4 @@
-package com.scarlatti.attempt2.schemas;
+package com.scarlatti.lib.schemas;
 
 import java.util.HashMap;
 import java.util.Map;
