@@ -1,6 +1,8 @@
 package com.scarlatti.lib.schemas;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 import com.fasterxml.jackson.module.jsonSchema.types.StringSchema;
 
 import java.util.List;
@@ -31,6 +33,9 @@ public class XStringSchema extends StringSchema {
     @JsonProperty("enum")
     private List<Object> enumValues;
 
+
+    private String type;
+
     public Map<String, Object> getxProps() {
         return xProps;
     }
@@ -45,5 +50,20 @@ public class XStringSchema extends StringSchema {
 
     public void setEnumValues(List<Object> enumValues) {
         this.enumValues = enumValues;
+    }
+//
+//    @JsonIgnore
+//    @Override
+//    public JsonFormatTypes getType() {
+//        return super.getType();
+//    }
+
+    @JsonProperty("type")
+    public String getType2() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

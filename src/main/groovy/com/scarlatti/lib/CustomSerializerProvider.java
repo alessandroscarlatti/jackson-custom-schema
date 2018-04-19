@@ -33,7 +33,7 @@ public class CustomSerializerProvider extends DefaultSerializerProvider {
     /**
      * must have this constructor for abstract class
      */
-    protected CustomSerializerProvider(SerializerProvider src, SerializationConfig config, SerializerFactory f) {
+    public CustomSerializerProvider(SerializerProvider src, SerializationConfig config, SerializerFactory f) {
         super(src, config, f);
     }
 

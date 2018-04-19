@@ -1,12 +1,14 @@
 package com.scarlatti.lib.visitors;
 
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonStringFormatVisitor;
 import com.fasterxml.jackson.module.jsonSchema.factories.FormatVisitorFactory;
 import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
+import com.scarlatti.lib.CustomSerializerProvider;
 import com.scarlatti.lib.schemas.CustomSchemaFactory;
 import com.scarlatti.lib.schemas.XZonedDateTimeSchema;
 
@@ -21,7 +23,9 @@ import java.time.ZonedDateTime;
  * ~  Thursday, 11/2/2017
  */
 public class CustomJsonFormatVisitor extends SchemaFactoryWrapper {
+    // this constructor is called initially
     public CustomJsonFormatVisitor() {
+        super();
         visitorFactory = new FormatVisitorFactory(new CustomVisitorFactory());  // TODO using FormatVisitorFactory instead
         schemaProvider = new CustomSchemaFactory();  // inject my custom schemas
     }

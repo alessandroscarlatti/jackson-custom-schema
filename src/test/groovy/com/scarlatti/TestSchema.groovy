@@ -1,8 +1,13 @@
 package com.scarlatti
 
+import com.fasterxml.jackson.core.Version
+import com.fasterxml.jackson.databind.Module
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.jsonSchema.customProperties.HyperSchemaFactoryWrapper
 import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper
+import com.fasterxml.jackson.module.jsonSchema.types.StringSchema
 import com.scarlatti.lib.visitors.CustomJsonFormatVisitor
 import com.scarlatti.lib.CustomSerializerProvider
 import com.scarlatti.model.AgedPenguin
@@ -66,7 +71,10 @@ class TestSchema extends Specification {
     void "can get a schema from a bean with a ZonedDateTime object"() {
         when:
             ObjectMapper mapper = new ObjectMapper()
+            mapper.registerModule(new JavaTimeModule())
+            mapper.registerModule(new TestModule())
             mapper.setSerializerProvider(new CustomSerializerProvider())
+
             SchemaFactoryWrapper schemaFactory = new CustomJsonFormatVisitor()
             mapper.acceptJsonFormatVisitor(AgedPenguin.class, schemaFactory)
 
@@ -75,7 +83,11 @@ class TestSchema extends Specification {
 
             // I would need to use a different object mapper to get proper serialization.
 
-            String actualJson = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(schemaFactory.finalSchema())
+            ObjectMapper mapper2 = new ObjectMapper()
+//            mapper2.setAnnotationIntrospector(new StringSchemaMixin.IgnoreInheritedIntrospector())
+            mapper2.addMixIn(StringSchema.class, StringSchemaMixin)
+
+            String actualJson = mapper2.writerWithDefaultPrettyPrinter().writeValueAsString(schemaFactory.finalSchema())
             println actualJson
 
         then:

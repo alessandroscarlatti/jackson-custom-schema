@@ -58,7 +58,13 @@ public class XZonedDateTimeSerializer extends XSerializer {
         // modify the schema that already exists in the visitor!
         // setSchema() is not allowed!
         // N.B. This assumes tha the visitor has already been given the ZonedDateTimeSchema!
-        StringSchema schema = stringVisitor.getSchema();
+        XStringSchema schema = (XStringSchema) stringVisitor.getSchema();
+        schema.setType("special");
         schema.setFormat(JsonValueFormat.DATE_TIME);
+
+        Map<String, Object> props = new HashMap<>();
+        props.put("qwer", "azsdf");
+
+        schema.setxProps(props);
     }
 }

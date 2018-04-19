@@ -27,6 +27,7 @@ dependencies {
 	compile 'org.codehaus.groovy:groovy-all:2.4.7'
 //	compile group: 'com.github.topikachu', name: 'JSONschema4-mapper', version: '0.0.1'
 	compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-jsonSchema', version: '2.9.2'
+	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.5'
 
 
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
